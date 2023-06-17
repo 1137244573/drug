@@ -1,4 +1,4 @@
-# drug
+# Drug management
 File Configuration:
 Create a new database and import the SQL file into it.
 Modify the database configuration in the settings file.
