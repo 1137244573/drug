@@ -1,0 +1,209 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>药品管理系统</title>
+    <link rel="stylesheet" href="{% static 'plugins/bootstrap-3.4.1/css/bootstrap.css' %}">
+    <link rel="stylesheet" href="{% static 'plugins/font-awesome-4.7.0/css/font-awesome.css' %}">
+    <style>body {
+        background-image: url("https://img2.baidu.com/it/u=1881229175,2263924447&fm=253&fmt=auto&app=138&f=JPEG?w=800&h=500");
+        background-size: cover;
+    }</style>
+    <style>
+        .navbor {
+            border-radius: 0;
+        }
+
+        /* 表格样式修改 */
+        .panel {
+            border: none;
+            box-shadow: none;
+            background-color: #f5f5f5;
+        }
+
+        .panel-heading {
+            background-color: #337ab7;
+            color: #fff;
+            font-weight: bold;
+            padding: 10px;
+        }
+
+        .table {
+            background-color: #fff;
+        }
+
+        .table th {
+            background-color: #f5f5f5;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        .table td {
+            text-align: center;
+        }
+
+        .table tr:hover {
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+        }
+
+        .btn {
+            padding: 2px 10px;
+            font-size: 12px;
+            margin: 2px;
+        }
+
+        .btn-primary {
+            background-color: #337ab7;
+            border-color: #337ab7;
+        }
+
+        .btn-primary:hover {
+            background-color: #286090;
+            border-color: #204d74;
+        }
+
+        .btn-danger {
+            background-color: #d9534f;
+            border-color: #d9534f;
+        }
+
+        .btn-danger:hover {
+            background-color: #c9302c;
+            border-color: #ac2925;
+        }
+
+
+        .popup {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.3);
+            display: none;
+        }
+
+        .close-button {
+            background-color: #d9534f;
+            color: #fff;
+            border: none;
+            padding: 5px 10px;
+            font-size: 12px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+
+    </style>
+    {% block css %}{% endblock %}
+
+</head>
+<body>
+<body>
+<div>
+    <!-- 导航条-->
+    <nav class="navbar navbar-default">
+        <div class="container">
+
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                        data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="/home/">药品管理系统</a>
+            </div>
+
+
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+
+
+                    <li><a href="/drug/list/">药品信息</a></li>
+
+
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                           aria-haspopup="true" aria-expanded="false">药品库存管理<span
+                                class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="/out/list/">出库管理</a></li>
+                            <li><a href="/ink/list/">入库管理</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                           aria-haspopup="true" aria-expanded="false">信息查询<span
+                                class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="/search/drug/">药品信息查询</a></li>
+                            <li><a href="/search/out/">出库查询</a></li>
+                            <li><a href="/search/in/">入库查询</a></li>
+                            <li><a href="/search/work/">员工信息查询</a></li>
+                            {% block biaoqian %}{% endblock %}
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                           aria-haspopup="true" aria-expanded="false">用户信息管理<span
+                                class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="/work/list/">员工管理</a></li>
+                            <li><a href="/putong/list/">普通用户管理</a></li>
+
+                        </ul>
+                    </li>
+
+
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                           aria-haspopup="true" aria-expanded="false">数据统计<span
+                                class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="/datapic/num/">药品库存数量</a></li>
+                            <li><a href="/datapic/chu/">药品出库数量</a></li>
+                            <li><a href="/datapic/ru/">药品入库数量</a></li>
+                            <li><a href="/datapic/chuhuan/">药品出库占比</a></li>
+                            <li><a href="/datapic/ruhuan/">药品入库占比</a></li>
+                            <li><a href="/datapic/baoxian/">药品保险数据</a></li>
+                            <li><a href="/datapic/kangjun/">药品抗菌数据</a></li>
+                            <li><a href="/datapic/zhong/">药品重点数据</a></li>
+                            <li><a href="/datapic/money/">药品价格数据</a></li>
+                        </ul>
+                    </li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="#"></a></li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                           aria-haspopup="true" aria-expanded="false">{{ request.session.info.name }}<span
+                                class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="/logout/">注销</a></li>
+                            <li><a href="/stock_query/">提醒</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</div>
+
+<div style="padding: 0 150px 0 150px ">
+    {% block content %}{% endblock %}
+</div>
+
+</body>
+
+
+<script src="{% static 'js/jq.js' %}"></script>
+<script src="{% static 'plugins/bootstrap-3.4.1/js/bootstrap.js' %}"></script>
+{% block js %}{% endblock %}
+</body>
+</html>

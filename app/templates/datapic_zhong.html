@@ -1,0 +1,19 @@
+{% extends 'moban.html' %}
+
+
+{% block content %}
+
+    <div class="panel panel-default" style="height: 600px">
+
+        <div class="panel-heading">
+            <h3 class="panel-title">重点关注药品</h3>
+        </div>
+        <div style="display: grid; place-items: center; padding-top: 20px" class="col-xs-6">
+            {{ charts|safe }}
+        </div>
+        <div style="display: grid; place-items: center; padding-top: 20px" class="col-xs-6">
+            {{ charts_2|safe }}
+        </div>
+    </div>
+
+{% endblock %}

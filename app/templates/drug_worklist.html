@@ -1,0 +1,202 @@
+{% extends 'moban_4.html' %}
+
+{% block css %}
+    <style>
+        #pagination {
+            position: fixed;
+            bottom: 20px;
+        }
+
+        /* 按钮样式 */
+        .button {
+            display: inline-block;
+            padding: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            position: relative; /* 添加相对定位 */
+        }
+
+        .button:hover {
+            background-color: #45a049;
+        }
+
+        /* 弹窗样式 */
+        .popup {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 950px;
+            height: 250px;
+            padding: 20px;
+            background-color: #f1f1f1;
+            border-radius: 5px;
+            text-align: center;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s, visibility 0.3s;
+        }
+
+        .popup.show {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .popup h2 {
+            margin-top: 0;
+        }
+
+        .popup p {
+            margin-bottom: 0;
+        }
+
+        .popup .close-button {
+            display: inline-block;
+            padding: 5px 10px;
+            background-color: #e74c3c;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .popup .close-button:hover {
+            background-color: #c0392b;
+        }
+    </style>
+{% endblock %}
+
+
+
+
+{% block content %}
+
+    <div class="container">
+        <div style="margin-bottom: 10px">
+            <a class="btn btn-primary" href="/drug/workadd/">
+                <span class="glyphicon glyphicon-zoom-in" aria-hidden="true"></span>
+                添加新的药品</a>
+
+            <div style="float: right">
+                <form method="get">
+                    <div class="input-group" style="width: 300px">
+                        <span class="input-group-btn">
+                </span>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
+                药品列表
+            </div>
+
+            <table class="table table-bordered table-striped">
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>药品名称</th>
+                    <th>剂型</th>
+                    <th>分类</th>
+                    <th>价格</th>
+                    <th>库存数量</th>
+                    <th>规格</th>
+                    <th>生产企业</th>
+                    <th>操作</th>
+                    <th>更多信息</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for obj in drug_data %}
+                    <tr>
+                        <th>{{ obj.id }}</th>
+                        <td>{{ obj.drugname }}</td>
+                        <td>{{ obj.drugjixing }}</td>
+                        <td>{{ obj.drugcate }}</td>
+                        <td>{{ obj.money }}</td>
+                        <td>{{ obj.number }}</td>
+                        <td>{{ obj.drugspe }}</td>
+                        <td>{{ obj.produce }}</td>
+                        <td>
+                            <a class="btn btn-primary btn-xs"
+                               href="/drug/{{ obj.id }}/workedit/">编辑</a>
+                            <a class="btn btn-danger btn-xs" style="margin-left: 30px"
+                               href="/drug/{{ obj.id }}/workdel/">删除</a>
+
+                        </td>
+
+                        <td>
+                            <div>
+                                <!-- 按钮 -->
+                                <span class="button" onclick="togglePopup('{{ obj.id }}')">点击查看详细信息</span>
+
+                                <!-- 弹窗 -->
+                                <div id="popup_{{ obj.id }}" class="popup">
+                                    <h3>药品详细信息</h3>
+                                    <table class="table table-bordered">
+                                        <thead>
+                                        <tr>
+                                            <th>ID</th>
+                                            <th>药品名称</th>
+                                            <th>类型编码</th>
+                                            <th>抗菌类别</th>
+                                            <th>保险类型</th>
+                                            <th>批准文号</th>
+                                            <th>是否为重点关注药品</th>
+                                            <th>是否通过一致性检验</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr>
+                                            <th>{{ obj.id }}</th>
+                                            <td>{{ obj.drugname }}</td>
+                                            <td>{{ obj.drugnid }}</td>
+                                            <td>{{ obj.get_drugant_display }}</td>
+                                            <td>{{ obj.get_insure_display }}</td>
+                                            <td>{{ obj.drugrat }}</td>
+                                            <td>{{ obj.get_drugkey_display }}</td>
+                                            <td>{{ obj.get_drugun_display }}</td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                    <button class="close-button" onclick="togglePopup('{{ obj.id }}')">关闭</button>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <ul class="pagination" id="pagination">
+
+            {{ page_string }}
+        </ul>
+
+    </div>
+{% endblock %}
+
+{% block js %}
+
+    <script>
+        function togglePopup(id) {
+
+            var popup = document.getElementById('popup_' + id);
+            popup.classList.toggle('show');
+        }
+    </script>
+
+{% endblock %}
+
+
+
+
+

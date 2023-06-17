@@ -1,0 +1,59 @@
+{% extends 'moban.html' %}
+
+{% block content %}
+
+    <div class="container">
+        <div style="margin-bottom: 10px">
+            <a class="btn btn-primary" href="/ink/add/">
+                <span class="glyphicon glyphicon-zoom-in" aria-hidden="true"></span>
+                添加新的入库记录</a>
+
+            <div style="float: right">
+                <form method="get">
+                    <div class="input-group" style="width: 300px">
+
+                        <span class="input-group-btn">
+
+                </span>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
+                入库信息列表
+            </div>
+
+            <table class="table table-bordered table-striped">
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>药品名称</th>
+                    <th>购买总价</th>
+                    <th>入库数量</th>
+                    <th>入库时间</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for obj in ink_data %}
+                    <tr>
+                        <th>{{ obj.id }}</th>
+                        <td>{{ obj.drug_name }}</td>
+                        <td>{{ obj.in_money }}</td>
+                        <td>{{ obj.in_number }}</td>
+                        <td>{{ obj.in_time }}</td>
+
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <ul class="pagination">
+
+            {{ page_string }}
+        </ul>
+
+
+{% endblock %}

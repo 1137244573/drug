@@ -1,0 +1,99 @@
+{% extends 'moban_4.html' %}
+
+
+{% block css %}
+    <style>
+
+        .custom-select {
+            appearance: none;
+            background-color: #f8f9fa;
+            border: 1px solid #ced4da;
+            border-radius: 4px;
+            padding: 8px 12px;
+            font-size: 14px;
+            color: #495057;
+        }
+
+        .custom-select:hover {
+            background-color: #e9ecef;
+        }
+
+        .custom-select:focus {
+            outline: none;
+            border-color: #80bdff;
+            box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+        }
+
+
+        .custom-button {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 8px 16px;
+            font-size: 14px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+
+        .custom-button:hover {
+            background-color: #0056b3;
+        }
+
+
+        .custom-button:active {
+            background-color: #004080;
+        }
+    </style>
+{% endblock %}
+
+{% block content %}
+
+    <div class="panel panel-default" style="height: 650px">
+
+        <div class="panel-heading">
+            <h3 class="panel-title">药品出库数据</h3>
+        </div>
+        <div style="padding: 10px 0 0 450px">
+            <form method="get">
+                {% csrf_token %}
+                <label for="year">选择年份：</label>
+                <select name="year" id="year" class="custom-select">
+                    <option value="2023">2023</option>
+                    <option value="2024">2024</option>
+                    <option value="2025">2025</option>
+
+                </select>
+
+                <label for="month">选择月份：</label>
+                <select name="month" id="month" class="custom-select">
+                    <option value="1">1月</option>
+                    <option value="2">2月</option>
+                    <option value="3">3月</option>
+                    <option value="4">4月</option>
+                    <option value="5">5月</option>
+                    <option value="6">6月</option>
+                    <option value="7">7月</option>
+                    <option value="8">8月</option>
+                    <option value="9">9月</option>
+                    <option value="10">10月</option>
+                    <option value="11">11月</option>
+                    <option value="12">12月</option>
+                </select>
+
+                <input type="submit" value="提交" class="custom-button">
+            </form>
+        </div>
+        <div style="display: grid;padding: 50px 0 0 80px;" class="col-xs-6">
+
+            {{ charts|safe }}
+
+        </div>
+        <div style="display: grid;padding: 50px 0 0 80px;" class="col-xs-6">
+
+            {{ charts_2|safe }}
+
+        </div>
+    </div>
+
+{% endblock %}

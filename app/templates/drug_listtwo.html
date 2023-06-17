@@ -1,0 +1,68 @@
+{% extends 'moban.html' %}
+
+
+
+{% block content %}
+
+    <div class="container">
+        <div style="margin-bottom: 10px">
+            <a class="btn btn-primary" href="/drug/add/">
+                <span class="glyphicon glyphicon-zoom-in" aria-hidden="true"></span>
+                添加新的药品</a>
+
+            <div style="float: right">
+                <form method="get">
+                    <div class="input-group" style="width: 300px">
+
+                        <span class="input-group-btn">
+
+                </span>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
+                药品列表
+            </div>
+
+            <table class="table table-bordered">
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>药品名称</th>
+                    <th>类型编码</th>
+                    <th>抗菌类别</th>
+                    <th>是否为重点关注药品</th>
+                    <th>是否通过一致性检验</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for obj in drug_data %}
+                    <tr>
+                        <th>{{ obj.id }}</th>
+                        <td>{{ obj.drugname }}</td>
+                        <td>{{ obj.drugnid }}</td>
+                        <td>{{ obj.get_drugant_display }}</td>
+                        <td>{{ obj.get_drugkey_display }}</td>
+                        <td>{{ obj.get_drugun_display }}</td>
+                        <td>
+                            <a class="btn btn-primary btn-xs"
+                               href="/drug/{{ obj.id }}/edit/">编辑</a>
+                            <a class="btn btn-danger btn-xs" style="margin-left: 30px"
+                               href="/drug/{{ obj.id }}/del/">删除</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <ul class="pagination">
+
+            {{ page_string }}
+        </ul>
+
+    </div>
+{% endblock %}

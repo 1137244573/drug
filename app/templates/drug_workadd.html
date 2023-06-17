@@ -1,0 +1,34 @@
+{% extends 'moban_4.html' %}
+
+{% block content %}
+
+    <div class="panel panel-default" style="padding: 0 100px 0 100px">
+        <div class="panel-heading">
+            <h3 class="panel-title">添加新的药品</h3>
+        </div>
+        <div class="panel-body">
+            <form href="/drug/workadd/" method="post" novalidate>
+                {% csrf_token %}
+                {% for field in form %}
+                    <div class="form-group; col-xs-6" style="padding-top: 10px">
+                        <label>{{ field.label }}</label>
+                        {{ field }}
+                        <span style="color: red;">{{ field.errors.0 }}</span>
+                    </div>
+                {% endfor %}
+
+                <div style="float: left; padding: 35px 0 0 200px">
+                    <button class="btn btn-primary  " type="submit" style="width: 100px;">保存</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+{% endblock %}

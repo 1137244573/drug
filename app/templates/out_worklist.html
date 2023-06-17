@@ -1,0 +1,59 @@
+{% extends 'moban_4.html' %}
+
+{% block content %}
+
+    <div class="container">
+        <div style="margin-bottom: 10px">
+            <a class="btn btn-primary" href="/out/workadd/">
+                <span class="glyphicon glyphicon-zoom-in" aria-hidden="true"></span>
+                添加新的出库记录</a>
+
+            <div style="float: right">
+                <form method="get">
+                    <div class="input-group" style="width: 300px">
+
+                        <span class="input-group-btn">
+
+                </span>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
+                出库记录列表
+            </div>
+
+            <table class="table table-bordered table-striped">
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>药品名称</th>
+                    <th>售出总价</th>
+                    <th>出库数量</th>
+                    <th>出库时间</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for obj in out_data %}
+                    <tr>
+                        <th>{{ obj.id }}</th>
+                        <td>{{ obj.drug_name }}</td>
+                        <td>{{ obj.out_money }}</td>
+                        <td>{{ obj.out_number }}</td>
+                        <td>{{ obj.out_time }}</td>
+
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <ul class="pagination">
+
+            {{ page_string }}
+        </ul>
+
+
+{% endblock %}

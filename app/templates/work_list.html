@@ -1,0 +1,76 @@
+{% extends 'moban.html' %}
+
+{% block css %}
+    <style>
+        #pagination {
+            position: fixed;
+            bottom: 20px;
+        }
+    </style>
+{% endblock %}
+
+
+{% block content %}
+
+    <div class="container">
+        <div style="margin-bottom: 10px">
+            <a class="btn btn-primary" href="/work/add/">
+                <span class="glyphicon glyphicon-zoom-in" aria-hidden="true"></span>
+                添加新的员工信息</a>
+
+
+        </div>
+
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
+                药品列表
+            </div>
+
+            <table class="table table-bordered table-striped">
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>用户名</th>
+                    <th>入职时间</th>
+                    <th>姓名</th>
+                    <th>性别</th>
+                    <th>电话</th>
+                    <th>操作</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for obj in work_data %}
+                        <tr>
+                            <th>{{ obj.id }}</th>
+                            <td>{{ obj.username }}</td>
+                            <td>{{ obj.time }}</td>
+                            <td>{{ obj.name }}</td>
+                            <td>{{ obj.get_gender_display }}</td>
+                            <td>{{ obj.phone }}</td>
+                            <td>
+                                <a class="btn btn-primary btn-xs"
+                                   href="/work/{{ obj.id }}/change/">修改密码</a>
+                                <a class="btn btn-primary btn-xs" style="margin-left: 30px"
+                                   href="/work/{{ obj.id }}/edit/">编辑</a>
+                                <a class="btn btn-danger btn-xs" style="margin-left: 30px"
+                                   onclick="confirmDelete({{ obj.id }})">删除</a>
+                            </td>
+                        </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <ul class="pagination" id="pagination">
+
+            {{ page_string }}
+        </ul>
+        <script>
+            function confirmDelete(id) {
+                if (confirm("确认删除该用户信息？")) {
+                    window.location.href = "/work/" + id + "/del/";
+                }
+            }
+        </script>
+
+{% endblock %}

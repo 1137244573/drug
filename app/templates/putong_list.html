@@ -1,0 +1,61 @@
+{% extends 'moban.html' %}
+
+{% block css %}
+    <style>
+        #pagination {
+            position: fixed;
+            bottom: 20px;
+        }
+    </style>
+{% endblock %}
+
+
+{% block content %}
+
+    <div class="container">
+
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
+            普通用户信息列表
+        </div>
+
+        <table class="table table-bordered table-striped">
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>用户名</th>
+
+                <th>操作</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for obj in putong_data %}
+                <tr>
+                    <th>{{ obj.id }}</th>
+                    <td>{{ obj.username }}</td>
+
+                    <td>
+                        <a class="btn btn-primary btn-xs"
+                           href="/putong/{{ obj.id }}/edit/">修改密码</a>
+                        <a class="btn btn-danger btn-xs" style="margin-left: 30px"
+                           onclick="confirmDelete({{ obj.id }})">删除</a>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <ul class="pagination" id="pagination">
+
+        {{ page_string }}
+    </ul>
+
+    <script>
+        function confirmDelete(id) {
+            if (confirm("确认删除该用户信息？")) {
+                window.location.href = "/putong/" + id + "/del/";
+            }
+        }
+    </script>
+{% endblock %}

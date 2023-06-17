@@ -1,0 +1,16 @@
+{% extends 'moban_4.html' %}
+
+
+{% block content %}
+
+    <div class="panel panel-default" style="height: 650px">
+
+        <div class="panel-heading">
+            <h3 class="panel-title">药品库存数量</h3>
+        </div>
+        <div style="display: grid; place-items: center; padding-top: 20px">
+            {{ charts|safe }}
+        </div>
+    </div>
+
+{% endblock %}
