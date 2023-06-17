@@ -1,7 +1,5 @@
 # drug
-bbb
 File Configuration:
-
 Create a new database and import the SQL file into it.
 Modify the database configuration in the settings file.
 The administrator account is "admin" with the password "admin".
